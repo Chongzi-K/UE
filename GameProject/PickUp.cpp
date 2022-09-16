@@ -9,7 +9,7 @@
 
 APickUp::APickUp()
 {
-	CoinCount = 1;
+
 }
 
 void APickUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -17,15 +17,18 @@ void APickUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* O
 	//调用父类的OnOverlapBegin
 	Super::OnOverlapBegin(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 
-	UE_LOG(LogTemp, Warning, TEXT("APickUp::OnOverlapBegin"));
+	//UE_LOG(LogTemp, Warning, TEXT("APickUp::OnOverlapBegin"));
 
 	if (OtherActor)
 	{
 		AMain* Main = Cast<AMain>(OtherActor);
 		if (Main)
 		{
-			Main->IncrementCoins(CoinCount);
+			OnPickUpBP(Main);
+
+			//Main->IncrementCoins(CoinCount);
 			Main->PickUpLocations.Add(GetActorLocation());
+
 			if (OverlapParticles)
 			{
 				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), OverlapParticles, GetActorLocation(), FRotator(0.0f), true, EPSCPoolMethod::None, true);

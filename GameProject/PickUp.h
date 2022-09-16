@@ -17,9 +17,6 @@ class FIRSTPROJECT_API APickUp : public AItem
 public:
 	APickUp();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Coins")
-	int32 CoinCount;
-
 	//父类已经有宏标记，子类就不能有
 	//UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)override;
@@ -27,4 +24,6 @@ public:
 	//UFUNCTION()
 	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)override;
 	
+	UFUNCTION(BlueprintImplementableEvent, Category = "PickUp")
+	void OnPickUpBP(class AMain* Target);
 };
