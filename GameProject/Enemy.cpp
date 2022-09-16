@@ -36,6 +36,7 @@ AEnemy::AEnemy()
 
 	bOverlappingCombatSphere = false;
 	bHasValidTarget = false;
+	
 
 	Health = 75.f;
 	MaxHealth = 100.f;
