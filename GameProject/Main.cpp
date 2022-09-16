@@ -488,3 +488,46 @@ float AMain::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEve
 
 	return DamageAmount;
 }
+
+void AMain::UpdateCombatTarget()
+{
+	TArray<AActor*> OverlappingActors;
+	GetOverlappingActors(OverlappingActors, EnemyFilter);
+	if(OverlappingActors.Num() == 0) 
+	{
+		if (MainPlayerController)
+		{
+			MainPlayerController->RemoveEnemyHealthBar();
+		}
+		return;
+	}
+	AEnemy* CloestEnemy = Cast<AEnemy>(OverlappingActors[0]);
+	if (CloestEnemy)
+	{
+		FVector MainLocation = GetActorLocation();
+		float MinDistance = (CloestEnemy->GetActorLocation() - MainLocation).Size();
+
+		for (AActor* Actor : OverlappingActors)
+		{
+			if (Actor)
+			{
+				float DistanceToActor = (Actor->GetActorLocation() - MainLocation).Size();
+				if (DistanceToActor < MinDistance) 
+				{
+					MinDistance = DistanceToActor; 
+					AEnemy* NewCloestEnemy = Cast<AEnemy>(Actor);
+					if (NewCloestEnemy)
+					{
+						CloestEnemy = NewCloestEnemy;
+					}
+				}
+			}
+		}
+		if (MainPlayerController)
+		{
+			MainPlayerController->DisplayEnemyHealthBar();
+		}
+		SetCombatTarget(CloestEnemy);;
+		bHasCombatTarget = true;
+	}
+}

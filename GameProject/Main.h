@@ -219,4 +219,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void DeathEnd();
+
+	void UpdateCombatTarget();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	TSubclassOf<AEnemy> EnemyFilter;
 };
