@@ -74,21 +74,31 @@ void AMainPlayerController::Tick(float DeltaTime)
 	}
 }
 
-void AMainPlayerController::DisplayPauseMenu()
+void AMainPlayerController::DisplayPauseMenu_Implementation()
 {
 	if (PauseMenu)
 	{
 		bPauseMenuVisible = true;
 		PauseMenu->SetVisibility(ESlateVisibility::Visible);
+
+		FInputModeGameAndUI InputModeGameAndUI;
+		SetInputMode(InputModeGameAndUI);
+		bShowMouseCursor = true;
 	}
 }
 
-void AMainPlayerController::RemovePauseMenu()
+void AMainPlayerController::RemovePauseMenu_Implementation()
 {
 	if (PauseMenu)
 	{
 		bPauseMenuVisible = false;
-		PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		//PauseMenu->SetVisibility(ESlateVisibility::Hidden);
+		//需要在蓝图中实现，①按Q瞬间执行C++版本，恢复人物控制②延时设置HUD消失
+		//也可以设置Timer实现
+
+		FInputModeGameOnly InputModeGameOnly;
+		SetInputMode(InputModeGameOnly);
+		bShowMouseCursor = false;
 	}
 }
 

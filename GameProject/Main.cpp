@@ -237,10 +237,10 @@ void AMain::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMain::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMain::MoveRight);
 	
-	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("Turn", this, &AMain::Turn);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AMain::TurnAtRate);
 	
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("LookUp", this, &AMain::LookUp);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AMain::LookUpAtRate);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMain::Jump);
@@ -256,10 +256,38 @@ void AMain::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("ESC", IE_Released, this, &AMain::ESCUp);
 }
 
+void AMain::Turn(float Value)
+{
+	if (CanMove(Value))
+	{
+		AddControllerYawInput(Value);
+	}
+}
+
+void AMain::LookUp(float Value)
+{
+	if (CanMove(Value))
+	{
+		AddControllerPitchInput(Value);
+	}
+}
+
+bool AMain::CanMove(float Value)
+{
+	if (MainPlayerController)
+	{
+		return (Value != 0.0f) &&
+			(!bAttacking) &&
+			(MovementStatus != EMovementStatus::EMS_Dead)&&
+			!(MainPlayerController->bPauseMenuVisible);
+	}
+	return false;
+}
+
 void AMain::MoveForward(float Value)
 {
 	bMovingForward = false;
-	if ((Controller != nullptr) && (Value != 0.0f)&&(!bAttacking)&&(MovementStatus!=EMovementStatus::EMS_Dead))
+	if (CanMove(Value))
 	{
 		//find the forward
 		const FRotator Rotation= Controller->GetControlRotation();
@@ -276,7 +304,7 @@ void AMain::MoveForward(float Value)
 void AMain::MoveRight(float Value)
 {
 	bMovingRight = false;
-	if ((Controller != nullptr) && (Value != 0.0f) && (!bAttacking) && (MovementStatus != EMovementStatus::EMS_Dead))
+	if (CanMove(Value))
 	{
 		//find the right
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -304,6 +332,8 @@ void AMain::LMBDown()
 	bLMBDown = true;
 
 	if (MovementStatus == EMovementStatus::EMS_Dead) { return;}
+
+	if (MainPlayerController)if (MainPlayerController->bPauseMenuVisible)return;
 
 	if (ActiveOverlappingItem)//choose if you want to equip this overlapping weapon
 	{
@@ -383,6 +413,8 @@ void AMain::Die()
 
 void AMain::Jump()
 {
+	if (MainPlayerController)if (MainPlayerController->bPauseMenuVisible)return;
+
 	if (MovementStatus != EMovementStatus::EMS_Dead)
 	{
 		Super::Jump();

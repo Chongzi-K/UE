@@ -169,6 +169,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	//Yaw rotation
+	void Turn(float Value);
+
+	//Pitch rotation
+	void LookUp(float Value);
+
 	//called for forwards/backwards input
 	void MoveForward(float Value);
 
@@ -178,6 +184,7 @@ public:
 	bool bMovingForward;
 	bool bMovingRight;
 
+	bool CanMove(float Value);
 
 	/**Called via input to turn at a given rate
 	* @pram Rate This is a normalized rate,i.e. 1.0f means 100%of desired turn rate
