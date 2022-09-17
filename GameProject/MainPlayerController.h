@@ -18,23 +18,23 @@ public:
 
 	//reference to the UMG asset in the editor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
-		TSubclassOf<class UUserWidget> HUDOverlayAsset;
+	TSubclassOf<class UUserWidget> HUDOverlayAsset;
 
 	//Variable to hold the widget after crafting it 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
-		UUserWidget* HUDOverlay;
+	UUserWidget* HUDOverlay;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
-		TSubclassOf<class UUserWidget> WEnemyHealthBar;
+	TSubclassOf<class UUserWidget> WEnemyHealthBar;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Widgets")
-		UUserWidget* EnemyHealthBar;
+	UUserWidget* EnemyHealthBar;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
-		TSubclassOf<class UUserWidget> WPauseMenu;
+	TSubclassOf<class UUserWidget> WPauseMenu;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Widgets")
-		UUserWidget* PauseMenu;
+	UUserWidget* PauseMenu;
 
 	bool bPauseMenuVisible;
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "HUD")
