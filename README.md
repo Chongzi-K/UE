@@ -37,3 +37,10 @@
 新增：
 
 1、新增 LevelTransitionVolume，用于进行Level之间的移动
+
+----------
+20220917-5
+
+新增：
+
+1、初见 SaveGame 类，实现一些简单小功能
