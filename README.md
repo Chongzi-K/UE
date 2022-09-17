@@ -65,3 +65,12 @@
 添加：
 
 1、添加PauseMenu进出动画，人物在bPauseMenuVisible=1时不可操作
+
+----------
+20220918-2
+
+添加：
+
+1、完善Pausemenu功能
+
+2、完善LevelTransitionVolume功能

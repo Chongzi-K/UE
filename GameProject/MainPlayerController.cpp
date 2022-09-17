@@ -91,13 +91,11 @@ void AMainPlayerController::RemovePauseMenu_Implementation()
 {
 	if (PauseMenu)
 	{
+		GameModeOnly();
 		bPauseMenuVisible = false;
 		//PauseMenu->SetVisibility(ESlateVisibility::Hidden);
 		//需要在蓝图中实现，①按Q瞬间执行C++版本，恢复人物控制②延时设置HUD消失
 		//也可以设置Timer实现
-
-		FInputModeGameOnly InputModeGameOnly;
-		SetInputMode(InputModeGameOnly);
 		bShowMouseCursor = false;
 	}
 }
@@ -112,4 +110,10 @@ void AMainPlayerController::TogglePauseMenu()
 	{
 		DisplayPauseMenu();
 	}
+}
+
+void AMainPlayerController::GameModeOnly()
+{
+	FInputModeGameOnly InputModeGameOnly;
+	SetInputMode(InputModeGameOnly);
 }

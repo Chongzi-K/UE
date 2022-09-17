@@ -247,4 +247,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void LoadGame(bool bSetPosition);
+
+	UFUNCTION(BlueprintCallable)
+	void LoadGameNoSwitch(bool bSetPosition);
+
 };

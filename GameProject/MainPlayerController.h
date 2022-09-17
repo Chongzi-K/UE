@@ -50,6 +50,8 @@ public:
 	void DisplayEnemyHealthBar();
 	void RemoveEnemyHealthBar();
 
+	void GameModeOnly();
+
 
 protected:
 	virtual void BeginPlay() override;
