@@ -543,3 +543,17 @@ void AMain::UpdateCombatTarget()
 		bHasCombatTarget = true;
 	}
 }
+
+void AMain::SwitchLevel(FName LevelName)
+{
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		FString CurrentLevel = World->GetMapName();
+		FString LevelNameToTransition = LevelName.ToString();
+		if (CurrentLevel != LevelNameToTransition)
+		{
+			UGameplayStatics::OpenLevel(World, LevelName);
+		}
+	}
+}
