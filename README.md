@@ -23,3 +23,10 @@
 添加：
 
 1、修改相关类使得可以基于PickUp类实现药剂(Potion)蓝图
+
+----------
+20220917-3
+
+添加：
+
+1、完善SpawnVolume，并完成EnemySpawnVolume_BP 与 PickUpSpawnVolume_BP
