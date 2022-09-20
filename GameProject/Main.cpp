@@ -37,6 +37,9 @@ AMain::AMain()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 
+	MovementComponent = CreateDefaultSubobject<UMovementComponent>(TEXT("CharacterMovement"));
+
+
 	//set our turn rates for input
 	BaseTurnRate = 65.f;
 	BaseLookUpRate = 65.f;

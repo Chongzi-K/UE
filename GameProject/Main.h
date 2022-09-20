@@ -251,4 +251,16 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void LoadGameNoSwitch(bool bSetPosition);
 
+
+
+
+
+
+
+
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CharacterMovement")
+	class UMovementComponent* MovementComponent;
+
 };
